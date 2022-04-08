@@ -1,0 +1,7 @@
+output*
+test_da_fare.rtf
+results/*
+old_stuff/*
+.vscode/*
+inputs/.DS_Store
+.DS_Store
