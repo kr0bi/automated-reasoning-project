@@ -108,6 +108,9 @@ constraint forall(i, j in 1..n) (possible_adjacent_moves(i,j));
 
 var int: p = sum (i,j in 1..n)(path[i,j]);
 
+var int: numero_muri = count (i,j in 1..n)(path[i,j] == malus /\ edificio[i,j] == 1);
+var int: numero_blocchetti = count (i,j in 1..n)(path[i,j] == 1 /\ (edificio[i,j] == 0 \/ edificio[i,j] == 2 \/ edificio[i,j] == 3));
+
 solve :: int_search(path, 
 %  input_order, 
 %  first_fail,
@@ -136,8 +139,10 @@ output
 %   ++
 %   show(path[i,j]) ++ "  " 
 %   | i, j in 1..n
-% ] ++ ["\n\n" ++ 
+% ] ++ ["\n\n" ] ++
 [
-"cost: " ++ show(p)
+"cost: " ++ show(p) ++ "\n" ++
+"pavimento: " ++ show(numero_blocchetti) ++ "\n" ++
+"muri: " ++ show(numero_muri)
 ]
 ;

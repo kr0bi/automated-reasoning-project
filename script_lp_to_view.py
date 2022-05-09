@@ -42,10 +42,10 @@ for i, _ in enumerate(assigns):
 for path in paths:
     a[int(path[0])-1][int(path[1])-1] = int(path[2])
 
-# for i in range(0, n):
-#     for j in range(0, n):
-#         print(a[i,j], sep=" ", end="\t")
-#     print()
+for i in range(0, n):
+    for j in range(0, n):
+        print(a[i,j], sep=" ", end="\t")
+    print()
 
 # print(a)
 

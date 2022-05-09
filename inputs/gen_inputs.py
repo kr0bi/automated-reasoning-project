@@ -2,14 +2,14 @@ import sys
 import random
 import numpy as np
 
-# possible_dimensions = [5]
-possible_dimensions = [5, 10, 10, 20, 20, 30, 50, 50, 80, 80, 100, 100]
+possible_dimensions = [35]
+# possible_dimensions = [5, 10, 10, 15, 15, 20, 20, 25, 30, 50, 80, 100]
  
 if len(sys.argv) != 2:
     raise Exception("chiama con 1 parametro aggiuntivo tra: 0, 1 o 2")
 
 def crea_matrix(dimension):
-    matrix = np.zeros((dimension, dimension), dtype = int)
+    matrix = np.random.randint(0, 2, (dimension,dimension))
     ix = random.randint(0, dimension-1)
     iy = random.randint(0, dimension-1)
 
@@ -23,15 +23,65 @@ def crea_matrix(dimension):
     matrix[ix, iy] = 2
     matrix[jx, jy] = 3
 
-    for i in range(dimension):
-        for j in range(dimension):
-            if matrix[i,j] == 2 or matrix[i,j] == 3:
-                pass
-            elif random.random() < 0.45:
-                matrix[i,j] = random.randint(0,1)
+    # for i in range(dimension):
+    #     for j in range(dimension):
+    #         if matrix[i,j] == 2 or matrix[i,j] == 3:
+    #             pass
+    #         elif random.random() < 0.25:
+    #             # matrix[i,j] = random.randint(0,1)
+    #             matrix[i,j] = 1
     
     return matrix, ix, iy, jx, jy
 
+
+def crea_matrix_tutta_vuota(dimension):
+    matrix = np.zeros((dimension, dimension), dtype=int)
+    ix = 0
+    iy = 0
+
+    jx = dimension-1
+    jy = dimension-1
+
+    matrix[ix, iy] = 2
+    matrix[jx, jy] = 3
+    
+    return matrix, ix, iy, jx, jy
+
+
+def crea_matrix_tutta_piena(dimension):
+    matrix = np.ones((dimension, dimension), dtype=int)
+    ix = 0
+    iy = 0
+
+    jx = dimension-1
+    jy = dimension-1
+
+    matrix[ix, iy] = 2
+    matrix[jx, jy] = 3
+    
+    return matrix, ix, iy, jx, jy
+
+
+def crea_matrix_zig_zag (dimension):
+    matrix = np.zeros((dimension, dimension), dtype=int)
+    ix = 0
+    iy = 0
+
+    jx = dimension-1
+    jy = dimension-1
+
+    for j in range(1, dimension-1, 4):
+        for i in range(0, dimension-1):
+            matrix[i, j] = 1
+    
+    for j in range(3, dimension-1, 4):
+        for i in range(1, dimension):
+            matrix[i,j] = 1
+
+    matrix[ix, iy] = 2
+    matrix[jx, jy] = 3
+
+    return matrix, ix, iy, jx, jy
 
 def funz():
     for count, dimension in enumerate(possible_dimensions):
